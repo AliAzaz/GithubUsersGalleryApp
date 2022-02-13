@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GithubUsersAPP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_users">Search Username</string>
+    <string name="search_latest">Search: Ali</string>
+    <string name="search">Search</string>
+    <string name="night_view">Night View</string>
+    <string name="share">Share</string>
+    <string name="error_internet">Internet not available</string>
+    <string name="retry">Retry</string>
+    <string name="loading_users">Loading more users</string>
+    <string name="loading_repos">Loading more repos</string>
+    <string name="no_user_found">Sorry none of the users is found.\n Please retry after some time</string>
+    <string name="starred_count">Starred count</string>
+    <string name="fork_count">Fork Count</string>
+    <string name="sample_name">Ali</string>
+    <string name="repos">Repositories</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/usersListFragment">
+
+    <fragment
+        android:id="@+id/usersListFragment"
+        android:name="com.example.githubusersapp.ui.fragment.searchusers.UsersListFragment"
+        android:label="Github Users"
+        tools:layout="@layout/fragment_users_list">
+        <action
+            android:id="@+id/action_usersListFragment_to_userDetailFragment2"
+            app:destination="@id/userDetailFragment"
+            app:launchSingleTop="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.githubusersapp.ui.fragment.userdetail.UserDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_user_detail">
+        <argument
+            android:name="userdata"
+            app:argType="string" />
+    </fragment>
+</navigation>

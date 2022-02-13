@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.example.githubusersapp.model.repo.UserRepoResultItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/parentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:elevation="@dimen/_1sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containeridcard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:elevation="@dimen/_2sdp"
+                android:gravity="center|start"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:textSize="22sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:loadLongString="@{item.name}"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/starLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/starred_count"
+                android:elevation="@dimen/_2sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_star"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toStartOf="@+id/txtStarCount"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStarCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_2sdp"
+                android:padding="@dimen/_5sdp"
+                android:text="@{String.valueOf(item.stargazersCount)}"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/forkLbl"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText"
+                tools:text="0" />
+
+            <ImageView
+                android:id="@+id/forkLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/fork_count"
+                android:elevation="@dimen/_2sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_fork"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toStartOf="@+id/txtForkCount"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtForkCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:elevation="@dimen/_2sdp"
+                android:padding="@dimen/_5sdp"
+                android:text="@{String.valueOf(item.forks)}"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText"
+                tools:text="0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
