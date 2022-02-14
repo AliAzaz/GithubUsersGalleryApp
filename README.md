@@ -11,6 +11,11 @@
  - Implemented MVVM-Clean Architecture using Usecase, Repository pattern for data
  - MockK tests for several classes
 
+## How it Build
+
+ - Using MVVM with dagger injection
+ - MockK tests
+ - Proguard rules
 
 ## CONNECT👍
 

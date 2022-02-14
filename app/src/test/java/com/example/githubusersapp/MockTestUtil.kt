@@ -26,6 +26,12 @@ class MockTestUtil {
             )
         }
 
+        fun createRepos(): UserRepoResult {
+            return UserRepoResult().apply {
+                this.addAll(createUserReposList())
+            }
+        }
+
 
         fun createSingleUser():UserData{
             return UserData(

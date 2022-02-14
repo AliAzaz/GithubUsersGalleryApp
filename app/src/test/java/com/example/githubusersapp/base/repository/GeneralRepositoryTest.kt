@@ -93,11 +93,11 @@ class GeneralRepositoryTest {
 
     }
 
-    /*@Test
+    @Test
     fun `test searchUserRepos returns list of users repos`() = runBlocking {
         //Given
         repository = GeneralRepository(authApi)
-        val searchUser = MockTestUtil.createUsersRepos()
+        val searchUser = MockTestUtil.createRepos()
 
         //When
         coEvery {
@@ -119,7 +119,7 @@ class GeneralRepositoryTest {
             CoreMatchers.`is`(searchUser.size)
         )
 
-    }*/
+    }
 
     @After
     fun tearDown() {
