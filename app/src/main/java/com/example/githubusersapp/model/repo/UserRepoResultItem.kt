@@ -172,7 +172,7 @@ data class UserRepoResultItem(
     var openIssuesCount: Int,
     @SerializedName("owner")
     @Expose
-    var owner: Owner,
+    var owner: Owner?,
     @SerializedName("private")
     @Expose
     var `private`: Boolean,
