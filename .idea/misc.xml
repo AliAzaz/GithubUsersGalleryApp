@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects_Ali/GithubUsersGalleryApp/app/src/main/res/layout/error_view.xml" value="0.13020833333333334" />
+        <entry key="..\:/AndroidStudioProjects_Ali/GithubUsersGalleryApp/app/src/main/res/layout/layout_user_repos_shimmer_loading.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects_Ali/GithubUsersGalleryApp/app/src/main/res/layout/user_repo_item_shimmer_loading.xml" value="0.25416666666666665" />
         <entry key="..\:/PersonalWork/AndroidStudioProjects_Ali/GitHubApiAccessApp/app/src/main/res/drawable/ic_fork.xml" value="0.25462962962962965" />
         <entry key="..\:/PersonalWork/AndroidStudioProjects_Ali/GitHubApiAccessApp/app/src/main/res/drawable/ic_search.xml" value="0.25462962962962965" />
         <entry key="..\:/PersonalWork/AndroidStudioProjects_Ali/GitHubApiAccessApp/app/src/main/res/drawable/ic_star.xml" value="0.25462962962962965" />

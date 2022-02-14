@@ -8,10 +8,10 @@
     android:orientation="vertical"
     app:duration="800">
 
-    <GridLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2">
+        android:orientation="vertical">
 
         <include layout="@layout/user_repo_item_shimmer_loading" />
 
@@ -45,6 +45,6 @@
 
         <include layout="@layout/user_repo_item_shimmer_loading" />
 
-    </GridLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.facebook.shimmer.ShimmerFrameLayout>

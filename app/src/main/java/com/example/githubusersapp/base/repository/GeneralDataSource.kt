@@ -1,6 +1,5 @@
 package com.example.githubusersapp.base.repository
 
-import com.example.githubusersapp.model.ImagesResult
 import com.example.githubusersapp.model.UserData
 import com.example.githubusersapp.model.UsersResult
 import com.example.githubusersapp.model.repo.UserRepoResult
