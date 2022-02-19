@@ -14,6 +14,7 @@ import com.example.githubusersapp.base.repository.ResponseStatus
 import com.example.githubusersapp.databinding.FragmentUsersListBinding
 import com.example.githubusersapp.model.UsersInfo
 import com.example.githubusersapp.utils.*
+import org.apache.commons.lang3.StringUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,7 +26,6 @@ class UsersListFragment : FragmentBase() {
     }
     private lateinit var adapter: GenericListAdapter<UsersInfo>
     private lateinit var bi: FragmentUsersListBinding
-    private var actionBarHeight = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,33 +36,11 @@ class UsersListFragment : FragmentBase() {
         * */
         return FragmentUsersListBinding.inflate(inflater, container, false).apply {
             bi = this
+            setInputLabelString(viewModel.getSearchQuery())
         }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        /*
-        * Get actionbar height for use in translation
-        * */
-        context?.let { item ->
-            actionBarHeight = with(TypedValue().also {
-                item.theme.resolveAttribute(
-                    android.R.attr.actionBarSize,
-                    it,
-                    true
-                )
-            }) {
-                TypedValue.complexToDimensionPixelSize(this.data, resources.displayMetrics)
-            }
-
-            /*
-            * Translate items on menu click
-            * */
-            actionBarHeight *= -1
-            bi.fldGrpSearchUsers.translationY = actionBarHeight.toFloat()
-            bi.nestedScrollView.translationY = actionBarHeight.toFloat() / 2
-
-        }
 
         /*
         * Initiating recyclerview
@@ -92,9 +70,7 @@ class UsersListFragment : FragmentBase() {
                                 message = it.message.toString()
                             )
                     } ?: run {
-                        //bi.multiStateView.viewState = MultiStateView.ViewState.ERROR
                         bi.layoutShimmerLoading.gone()
-                        bi.productList.gone()
                         bi.nestedScrollView.showSnackBar(
                             message = getString(R.string.error_internet),
                             action = getString(R.string.retry)
@@ -137,11 +113,14 @@ class UsersListFragment : FragmentBase() {
         * */
         bi.edtSearchUsers.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                bi.edtSearchUsers.hideKeyboard()
-                val s = bi.edtSearchUsers.text.toString()
-                adapter.clearProductItem()
-                bi.populateTxt.text = "Search: ${s.toUpperCase(Locale.ENGLISH)}"
-                viewModel.searchUserFromRemote(s)
+                if (bi.edtSearchUsers.text.toString().trim().isNotEmpty()) {
+                    bi.edtSearchUsers.hideKeyboard()
+                    val s = bi.edtSearchUsers.text.toString()
+                    adapter.clearProductItem()
+                    setInputLabelString(s)
+                    viewModel.searchUserFromRemote(s)
+                    bi.layoutShimmerLoading.visibility = View.VISIBLE
+                }
             }
             false
         }
@@ -150,10 +129,11 @@ class UsersListFragment : FragmentBase() {
         * User search clear
         * */
         bi.inputSearchUsers.setEndIconOnClickListener {
-            bi.edtSearchUsers.setText("")
+            //Clearing adapter
             adapter.clearProductItem()
-            bi.populateTxt.text = "Search: Ali"
-            viewModel.searchUserFromRemote("Ali")
+            //Clearing layout
+            bi.edtSearchUsers.text = null
+            setInputLabelString(null)
         }
 
     }
@@ -163,7 +143,7 @@ class UsersListFragment : FragmentBase() {
     * */
     @SuppressLint("ResourceType")
     private fun callingRecyclerView() {
-        adapter = GenericListAdapter(R.layout.product_view) { item, position ->
+        adapter = GenericListAdapter(R.layout.user_view) { item, position ->
             findNavController().navigate(
                 UsersListFragmentDirections.actionUsersListFragmentToUserDetailFragment2(
                     item.login
@@ -180,26 +160,10 @@ class UsersListFragment : FragmentBase() {
         setHasOptionsMenu(true)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.search_menu).isVisible = true
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.search_menu -> {
-                bi.fldGrpSearchUsers.animate().apply {
-                    duration = 1000
-                    translationY(if (bi.fldGrpSearchUsers.translationY == actionBarHeight.toFloat()) 10f else actionBarHeight.toFloat())
-                }.start()
-                bi.nestedScrollView.animate().apply {
-                    duration = 1000
-                    translationY(if (bi.nestedScrollView.translationY == actionBarHeight.toFloat() / 2) 10f else actionBarHeight.toFloat() / 2)
-                }.start()
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun setInputLabelString(lbl: String?) {
+        bi.populateTxt.text =
+            lbl?.let {
+                String.format("Search: ${it.uppercase(Locale.ENGLISH)}")
+            } ?: StringUtils.EMPTY
     }
 }

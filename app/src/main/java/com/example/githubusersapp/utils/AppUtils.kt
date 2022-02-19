@@ -14,7 +14,10 @@ fun String.convertStringToUpperCase(): String {
      * Program that first convert all uper case into lower case then
      * convert fist letter into uppercase
      */
-    val calStr = this.split(" ").map { it.toLowerCase(Locale.ENGLISH).capitalize(Locale.ENGLISH) }
+    val calStr = this.split(" ").map { it ->
+        it.lowercase(Locale.ENGLISH)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ENGLISH) else it.toString() }
+    }
     return calStr.joinToString(separator = " ")
 }
 

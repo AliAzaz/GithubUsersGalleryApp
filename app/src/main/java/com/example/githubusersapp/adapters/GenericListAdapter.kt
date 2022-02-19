@@ -42,6 +42,11 @@ class GenericListAdapter<T> internal constructor(
 
     fun clearProductItem() {
         productItems.clear()
+        val diffCallback =
+            GenericViewHolder.ChildViewDiffUtils(filteredProductItems, productItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.dispatchUpdatesTo(this)
+        filteredProductItems.clear()
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GenericViewHolder<T> {

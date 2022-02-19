@@ -30,11 +30,6 @@ class UserDetailFragment : FragmentBase() {
         setHasOptionsMenu(false)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.findItem(R.id.search_menu).isVisible = false
-        super.onPrepareOptionsMenu(menu)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -112,7 +107,6 @@ class UserDetailFragment : FragmentBase() {
                             )
                     } ?: run {
                         bi.layoutShimmerLoading.gone()
-                        bi.repoList.gone()
                         bi.nestedScrollView.showSnackBar(
                             message = getString(R.string.error_internet),
                             action = getString(R.string.retry)
@@ -145,7 +139,6 @@ class UserDetailFragment : FragmentBase() {
     @SuppressLint("ResourceType")
     private fun callingRecyclerView() {
         adapter = GenericListAdapter(R.layout.repo_view) { item, position ->
-
         }
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY

@@ -10,6 +10,7 @@ import com.example.githubusersapp.ui.fragment.searchusers.usecase.UserSearchUseC
 import com.example.githubusersapp.model.FetchDataModel
 import com.example.githubusersapp.model.UsersInfo
 import kotlinx.coroutines.launch
+import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
 
 /**
@@ -24,26 +25,22 @@ class UsersViewModel @Inject constructor(
         get() = _usersList
 
     private var pagination = 1
-    private var searchUser = "Ali"
+    private var searchUser: String? = null
     private var updatedItems = arrayListOf<UsersInfo>()
-
-    init {
-        searchUserFromRemote(searchUser)
-    }
 
     /*
     * load next page
     * */
     fun loadNextPageUsers() {
         pagination++
-        fetchSearchUsersFromRemoteServer(pagination, searchUser)
+        searchUser?.let { fetchSearchUsersFromRemoteServer(pagination, it) }
     }
 
     /*
     * Retry connection if internet is not available
     * */
     fun retryConnection() {
-        fetchSearchUsersFromRemoteServer(pagination, searchUser)
+        searchUser?.let { fetchSearchUsersFromRemoteServer(pagination, it) }
     }
 
     /*
@@ -124,4 +121,8 @@ class UsersViewModel @Inject constructor(
         }
     }
 
+    /*
+    * Search query
+    * */
+    fun getSearchQuery() = searchUser
 }
