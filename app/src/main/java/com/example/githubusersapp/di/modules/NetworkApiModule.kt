@@ -6,6 +6,8 @@ import com.example.githubusersapp.utils.CONSTANTS.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,15 +19,14 @@ import javax.inject.Singleton
  * @author AliAzazAlam on 2/13/2022.
  */
 @Module
+@InstallIn(SingletonComponent::class)
 class NetworkApiModule {
 
-    @Singleton
     @Provides
     fun buildBackendApi(retrofit: Retrofit): AuthApi {
         return retrofit.create(AuthApi::class.java)
     }
 
-    @Singleton
     @Provides
     fun buildRetrofitClient(
         okHttpClient: OkHttpClient,
@@ -41,7 +42,6 @@ class NetworkApiModule {
             .build()
     }
 
-    @Singleton
     @Provides
     fun buildOkHttpClient(): OkHttpClient {
         return OkHttpClient().newBuilder().also { item ->
@@ -54,13 +54,11 @@ class NetworkApiModule {
 
 
     @Provides
-    @Singleton
     fun getGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    @Singleton
     fun getCoroutineCallAdapter(): CoroutineCallAdapterFactory {
         return CoroutineCallAdapterFactory.invoke()
     }

@@ -11,14 +11,14 @@ import com.example.githubusersapp.base.repository.ResponseStatus
 import com.example.githubusersapp.databinding.FragmentUserDetailBinding
 import com.example.githubusersapp.utils.*
 import androidx.databinding.library.baseAdapters.BR
+import androidx.fragment.app.viewModels
 import com.example.githubusersapp.model.repo.UserRepoResultItem
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class UserDetailFragment : FragmentBase() {
 
-    private val viewModel: UserDetailViewModel by lazy {
-        obtainViewModel(this, UserDetailViewModel::class.java, viewModelFactory)
-    }
+    private val viewModel by viewModels<UserDetailViewModel>()
     private lateinit var bi: FragmentUserDetailBinding
     private val userLoginName: String by lazy {
         arguments?.getString(CONSTANTS.INTENT_EXTRAS.USER_DATA) as String

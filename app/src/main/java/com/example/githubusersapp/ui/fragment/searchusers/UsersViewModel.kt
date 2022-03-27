@@ -9,6 +9,7 @@ import com.example.githubusersapp.base.repository.ResultCallBack
 import com.example.githubusersapp.ui.fragment.searchusers.usecase.UserSearchUseCase
 import com.example.githubusersapp.model.FetchDataModel
 import com.example.githubusersapp.model.UsersInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
@@ -16,6 +17,7 @@ import javax.inject.Inject
 /**
  * @author AliAzazAlam on 2/13/2022.
  */
+@HiltViewModel
 class UsersViewModel @Inject constructor(
     private val userSearchUseCase: UserSearchUseCase
 ) : ViewModel() {

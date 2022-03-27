@@ -1,4 +1,4 @@
-package com.example.githubusersapp.viewholder
+package com.example.githubusersapp.adapters.viewholder
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil

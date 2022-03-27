@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusersapp.R
@@ -14,16 +15,15 @@ import com.example.githubusersapp.base.repository.ResponseStatus
 import com.example.githubusersapp.databinding.FragmentUsersListBinding
 import com.example.githubusersapp.model.UsersInfo
 import com.example.githubusersapp.utils.*
+import dagger.hilt.android.AndroidEntryPoint
 import org.apache.commons.lang3.StringUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+@AndroidEntryPoint
 class UsersListFragment : FragmentBase() {
 
-    private val viewModel: UsersViewModel by lazy {
-        obtainViewModel(this, UsersViewModel::class.java, viewModelFactory)
-    }
+    private val viewModel by viewModels<UsersViewModel>()
     private lateinit var adapter: GenericListAdapter<UsersInfo>
     private lateinit var bi: FragmentUsersListBinding
 

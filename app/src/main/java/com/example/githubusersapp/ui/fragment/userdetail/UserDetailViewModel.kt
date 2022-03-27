@@ -11,6 +11,7 @@ import com.example.githubusersapp.ui.fragment.userdetail.usecases.SpecificUserUs
 import com.example.githubusersapp.model.FetchDataModel
 import com.example.githubusersapp.model.UserData
 import com.example.githubusersapp.model.repo.UserRepoResultItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
@@ -18,6 +19,7 @@ import javax.inject.Inject
 /**
  * @author AliAzazAlam on 2/13/2022.
  */
+@HiltViewModel
 class UserDetailViewModel @Inject constructor(
     private val specificUserUseCase: SpecificUserUseCase,
     private val specificUserReposUseCase: SpecificSpecificUserReposUseCase

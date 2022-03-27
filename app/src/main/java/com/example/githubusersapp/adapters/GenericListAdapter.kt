@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githubusersapp.viewholder.GenericViewHolder
+import com.example.githubusersapp.adapters.viewholder.GenericViewHolder
 
 /**
  * @author AliAzazAlam on 2/13/2022.
