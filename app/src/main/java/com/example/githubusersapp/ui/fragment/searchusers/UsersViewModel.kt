@@ -127,4 +127,13 @@ class UsersViewModel @Inject constructor(
     * Search query
     * */
     fun getSearchQuery() = searchUser
+
+    /*
+    * Clear fields
+    * */
+    fun clearFields(){
+        pagination = 1
+        searchUser = null
+        updatedItems = arrayListOf()
+    }
 }

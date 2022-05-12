@@ -67,7 +67,7 @@ class UserDetailFragment : FragmentBase() {
         /*
         * Fetch product list
         * */
-        viewModel.selectedUserResponse.observe(viewLifecycleOwner, {
+        viewModel.selectedUserResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
                     it.data?.let { item ->
@@ -80,13 +80,13 @@ class UserDetailFragment : FragmentBase() {
                 ResponseStatus.LOADING -> {
                 }
             }
-        })
+        }
 
 
         /*
         * Fetch Repo list
         * */
-        viewModel.userReposResponse.observe(viewLifecycleOwner, {
+        viewModel.userReposResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
                     it.data?.apply {
@@ -130,7 +130,7 @@ class UserDetailFragment : FragmentBase() {
                 }
             }
 
-        })
+        }
     }
 
     /*
@@ -138,10 +138,11 @@ class UserDetailFragment : FragmentBase() {
     * */
     @SuppressLint("ResourceType")
     private fun callingRecyclerView() {
-        adapter = GenericListAdapter(R.layout.repo_view) { item, position ->
+        adapter = GenericListAdapter(R.layout.repo_view) { item, position -> }
+        adapter.apply {
+            stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            bi.repoList.adapter = this
         }
-        adapter.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        bi.repoList.adapter = adapter
     }
 }

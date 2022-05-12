@@ -7,8 +7,4 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-abstract class FragmentBase : Fragment() {
-
-/*    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory*/
-}
+abstract class FragmentBase : Fragment()

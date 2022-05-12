@@ -2,7 +2,6 @@ package com.example.githubusersapp.ui.fragment.searchusers
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
@@ -50,7 +49,7 @@ class UsersListFragment : FragmentBase() {
         /*
         * Fetch User list
         * */
-        viewModel.usersResponse.observe(viewLifecycleOwner, {
+        viewModel.usersResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 ResponseStatus.SUCCESS -> {
                     it.data?.apply {
@@ -94,7 +93,7 @@ class UsersListFragment : FragmentBase() {
                 }
             }
 
-        })
+        }
 
         /*
         * Checking scrollview scroll end
@@ -131,6 +130,8 @@ class UsersListFragment : FragmentBase() {
         bi.inputSearchUsers.setEndIconOnClickListener {
             //Clearing adapter
             adapter.clearProductItem()
+            //Clearing Viewmodel fields
+            viewModel.clearFields()
             //Clearing layout
             bi.edtSearchUsers.text = null
             setInputLabelString(null)
@@ -150,9 +151,11 @@ class UsersListFragment : FragmentBase() {
                 )
             )
         }
-        adapter.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        bi.productList.adapter = adapter
+        adapter.apply {
+            stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            bi.productList.adapter = this
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -160,9 +163,9 @@ class UsersListFragment : FragmentBase() {
         setHasOptionsMenu(true)
     }
 
-    private fun setInputLabelString(lbl: String?) {
+    private fun setInputLabelString(searchedLbl: String?) {
         bi.populateTxt.text =
-            lbl?.let {
+            searchedLbl?.let {
                 String.format("Search: ${it.uppercase(Locale.ENGLISH)}")
             } ?: StringUtils.EMPTY
     }
