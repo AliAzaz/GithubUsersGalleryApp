@@ -11,7 +11,6 @@ import com.example.githubusersapp.model.FetchDataModel
 import com.example.githubusersapp.model.UsersInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
 
 /**
@@ -34,7 +33,6 @@ class UsersViewModel @Inject constructor(
     * load next page
     * */
     fun loadNextPageUsers() {
-        pagination++
         searchUser?.let { fetchSearchUsersFromRemoteServer(pagination, it) }
     }
 
@@ -57,16 +55,16 @@ class UsersViewModel @Inject constructor(
     /*
     * Query to fetch users from server
     * */
-    private fun fetchSearchUsersFromRemoteServer(pagination: Int, search: String) {
+    private fun fetchSearchUsersFromRemoteServer(page: Int, search: String) {
         _usersList.value = ResponseStatusCallbacks.loading(
             data = FetchDataModel(
-                page = pagination,
+                page = page,
                 usersInfo = null
             )
         )
         viewModelScope.launch {
             try {
-                userSearchUseCase(page = pagination, category = search).let { user ->
+                userSearchUseCase(page = page, category = search).let { user ->
                     when (user) {
                         is ResultCallBack.CallException -> {
                             _usersList.postValue(
@@ -88,7 +86,9 @@ class UsersViewModel @Inject constructor(
                             user.data.collect { dataset ->
                                 dataset.usersInfo.let {
                                     if (it.isNotEmpty()) {
-                                        if (pagination == 1) {
+                                        //pagination increased for next page
+                                        pagination++
+                                        if (page == 1) {
                                             updatedItems = arrayListOf()
                                             updatedItems.addAll(it)
                                         } else {
@@ -97,7 +97,7 @@ class UsersViewModel @Inject constructor(
                                         _usersList.postValue(
                                             ResponseStatusCallbacks.success(
                                                 data = FetchDataModel(
-                                                    page = pagination,
+                                                    page = page,
                                                     usersInfo = updatedItems
                                                 ),
                                                 "Users received"
@@ -106,10 +106,10 @@ class UsersViewModel @Inject constructor(
                                     } else
                                         _usersList.value = ResponseStatusCallbacks.error(
                                             data = FetchDataModel(
-                                                page = pagination,
+                                                page = page,
                                                 usersInfo = null
                                             ),
-                                            if (pagination == 1) "Sorry no Users received" else "Sorry no more Users available"
+                                            if (page == 1) "Sorry no Users received" else "Sorry no more Users available"
                                         )
                                 }
                             }

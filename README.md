@@ -8,14 +8,20 @@
 ## Architecture
 
  - Using Modern Android Development practices
- - Implemented MVVM-Clean Architecture using Usecase, Repository pattern for data
+ - Implemented MVVM-Clean Architecture using Usecase, Repository pattern for data.
  - MockK tests for several classes
 
 ## How it Build
 
- - Using MVVM with dagger injection
+ - Using MVVM with Dagger (Hilt) injection
  - MockK tests
  - Proguard rules
+
+## Missing
+
+ - Implement Paging3 for data loading in pagination
+ - Add UI Test
+ - Replace LiveData with StateFlow
 
 ## CONNECT👍
 
